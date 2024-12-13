@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="Author" content="Guilherme">
+    <title>Sorteio De Nomes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        input {
+            width: 80%;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin-top: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+            transition: 0.5s, 0.5s;
+            transform: scale(1.1);
+        }
+
+        #resultado {
+            margin-top: 20px;
+            font-size: 20px;
+            color: #333;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sorteio</h1>
+        <p>Digite os nomes dos participantes, separados por vírgulas:</p>
+        <input type="text" id="nomes" placeholder="Ex: João, Maria, Pedro" />
+        <button onclick="realizarSorteio()">Sorteio</button>
+        <p id="resultado"></p>
+    </div>
+
+    <script>
+        function realizarSorteio() {
+            // Aqui iremos recuperar o valor digitado no input
+            const nomesInput = document.getElementById('nomes').value;
+            
+            // Aqui iremos verificar se o campo está vazio
+            if (nomesInput.trim() === "") {
+                alert("Por favor, insira nomes.");
+                return;
+            }
+
+            // Aqui iremos converter a string de nomes em um array, separando por vírgula
+            const nomes = nomesInput.split(",").map(nome => nome.trim()).filter(nome => nome !== "");
+
+            // Aqui ira verificar se há participantes suficientes
+            if (nomes.length < 1) {
+                alert("Por favor, insira pelo menos um nome válido.");
+                return;
+            }
+
+            // Gera um índice aleatório
+            const sorteadoIndex = Math.floor(Math.random() * nomes.length);
+
+            // Exibe o nome da pessoa sorteada
+            const resultado = document.getElementById('resultado');
+            resultado.textContent = `O sorteado foi: ${nomes[sorteadoIndex]}`;
+        }
+    </script>
+</body>
+</html>
